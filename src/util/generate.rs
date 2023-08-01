@@ -50,13 +50,13 @@ mod tests {{
     #[test]
     fn test_{id}_part1_puzzle() {{
         let data = fs::read_to_string(\"src/solution/input{id}.txt\").expect(\"Unable to read file\");
-        assert_eq!(280, Solution::aoc_{id}_part1(&data));
+        assert_eq!(0, Solution::aoc_{id}_part1(&data));
     }}
 
     #[test]
     fn test_{id}_part2_puzzle() {{
         let data = fs::read_to_string(\"src/solution/input{id}.txt\").expect(\"Unable to read file\");
-        assert_eq!(280, Solution::aoc_{id}_part2(&data));
+        assert_eq!(0, Solution::aoc_{id}_part2(&data));
     }}
 }}",
             id = id
