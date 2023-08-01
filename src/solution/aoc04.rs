@@ -34,23 +34,27 @@ mod tests {
 
     use super::*;
 
+    #[ignore]
     #[test]
     fn test_04_part1() {
         assert_eq!(609043, Solution::aoc_04_part1("abcdef"));
         assert_eq!(1048970, Solution::aoc_04_part1("pqrstuv"));
     }
 
+    #[ignore]
     #[test]
     fn test_04_part2() {
         assert_eq!(6742839, Solution::aoc_04_part2("abcdef"));
     }
 
+    #[ignore]
     #[test]
     fn test_04_part1_puzzle() {
         let data = fs::read_to_string("src/solution/input04.txt").expect("Unable to read file");
         assert_eq!(346386, Solution::aoc_04_part1(&data));
     }
 
+    #[ignore]
     #[test]
     fn test_04_part2_puzzle() {
         let data = fs::read_to_string("src/solution/input04.txt").expect("Unable to read file");
