@@ -48,7 +48,36 @@ impl Solution {
     }
 
     pub fn aoc_05_part2(strs: &str) -> i32 {
-        0
+        let mut count = 0;
+        for line in strs.lines() {
+            if Solution::is_sandwich(line) && Solution::a_pair_duplicate(line) {
+                count += 1
+            }
+        }
+        count
+    }
+
+    fn is_sandwich(s: &str) -> bool {
+        let ans = s
+            .chars()
+            .collect::<Vec<char>>()
+            .windows(3)
+            .any(|x| x[0] == x[2]);
+        ans
+    }
+
+    fn a_pair_duplicate(s: &str) -> bool {
+        for (i, w1) in s.chars().collect::<Vec<char>>().windows(2).enumerate() {
+            for (j, w2) in s.chars().collect::<Vec<char>>().windows(2).enumerate() {
+                if (i == j || i == j + 1 || i + 1 == j) {
+                    continue;
+                }
+                if w1[0] == w2[0] && w1[1] == w2[1] {
+                    return true;
+                }
+            }
+        }
+        false
     }
 }
 
@@ -91,7 +120,11 @@ mod tests {
 
     #[test]
     fn test_05_part2() {
-        assert_eq!(0, Solution::aoc_05_part2("(())"));
+        assert_eq!(1, Solution::aoc_05_part2("qjhvhtzxzqqjkmpb"));
+        assert_eq!(1, Solution::aoc_05_part2("xxyxx"));
+        assert_eq!(0, Solution::aoc_05_part2("aaa"));
+        assert_eq!(0, Solution::aoc_05_part2("uurcxstgmygtbstg"));
+        assert_eq!(0, Solution::aoc_05_part2("ieodomkazucvgmuy"));
     }
 
     #[test]
