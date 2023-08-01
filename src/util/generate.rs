@@ -1,10 +1,14 @@
-use std::{fs::File, io::Write};
+use std::{
+    fs::{File, OpenOptions},
+    io::{BufRead, BufReader, Write},
+};
 
 pub fn generate_template(id: String) -> bool {
     println!("Generating aoc2015 template for id {id}");
     let filename = format!("aoc{:02}.rs", id);
     let data_filename = format!("input{:02}.txt", id);
     println!("Filename: {filename}");
+    update_mod_file(&id);
     create_solution_file(filename, id);
     create_input_file(data_filename);
     true
@@ -18,16 +22,19 @@ fn create_solution_file(filename: String, id: String) {
             "pub struct Solution {{}}
 
 impl Solution {{
-    pub fn aoc_{id}_part1(nums: strs: &str) -> i32{{
-        vec![]
+    pub fn aoc_{id}_part1(strs: &str) -> i32 {{
+        0
     }}
-    pub fn aoc_{id}_part2(nums: strs: &str) -> i32 {{
-        vec![]
+
+    pub fn aoc_{id}_part2(strs: &str) -> i32 {{
+        0
     }}
 }}
 
 #[cfg(test)]
 mod tests {{
+    use std::fs;
+
     use super::*;
 
     #[test]
@@ -62,4 +69,35 @@ mod tests {{
 fn create_input_file(filename: String) {
     let mut file = File::create(format!("src/solution/{}", filename))
         .expect("Error encountered while creating file!");
+}
+
+fn update_mod_file(id: &String) {
+    let mut file = OpenOptions::new()
+        .write(true)
+        .read(true)
+        .append(true)
+        .open("src/solution/mod.rs")
+        .unwrap();
+
+    if let Err(e) = writeln!(file, "mod aoc{};", id) {
+        eprintln!("Couldn't write to file: {}", e);
+    }
+
+    let reader = BufReader::new(&mut file);
+
+    let mut lines: Vec<_> = reader
+        .lines()
+        .map(|l| l.expect("Couldn't read a line"))
+        .collect();
+    lines.dedup();
+
+    let mut file = OpenOptions::new()
+        .write(true)
+        .open("src/solution/mod.rs")
+        .unwrap();
+
+    for line in lines {
+        file.write_all(line.as_bytes())
+            .expect("Couldn't write to file");
+    }
 }
