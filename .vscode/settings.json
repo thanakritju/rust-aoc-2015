@@ -3,7 +3,4 @@
         ".\\Cargo.toml"
     ],
     "editor.formatOnSave": true,
-    "[rust]": {
-        "editor.semanticHighlighting.enabled": true
-    }
 }
