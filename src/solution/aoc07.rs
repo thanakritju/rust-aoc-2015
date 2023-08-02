@@ -10,19 +10,33 @@ impl Solution {
         let mixed_pattern = Regex::new(r"(\w+) (AND|LSHIFT|RSHIFT|OR) (\w+) -> (\w+)").unwrap();
         let add_compliment_pattern = Regex::new(r"NOT (\w+) -> (\w+)").unwrap();
         let add_pattern = Regex::new(r"(\w+) -> (\w+)").unwrap();
+        let mut lines: Vec<&str> = strs.lines().collect();
 
-        for line in strs.lines() {
+        while lines.len() > 0 {
+            let line = lines.remove(0);
             match mixed_pattern.captures(line) {
                 Some(matched) => {
                     let a = matched.get(1).unwrap().as_str();
                     let a = match a.parse::<u16>() {
                         Ok(v) => v,
-                        Err(e) => *map.entry(a.to_string()).or_default(),
+                        Err(e) => match map.get(a) {
+                            Some(v) => *v,
+                            None => {
+                                lines.push(line);
+                                continue;
+                            }
+                        },
                     };
                     let b = matched.get(3).unwrap().as_str();
                     let b = match b.parse::<u16>() {
                         Ok(v) => v,
-                        Err(e) => *map.entry(b.to_string()).or_default(),
+                        Err(e) => match map.get(b) {
+                            Some(v) => *v,
+                            None => {
+                                lines.push(line);
+                                continue;
+                            }
+                        },
                     };
                     let v1;
                     let action = matched.get(2).unwrap().as_str();
@@ -53,7 +67,13 @@ impl Solution {
                     let a = matched.get(1).unwrap().as_str();
                     let v1 = !match a.parse::<u16>() {
                         Ok(v) => v,
-                        Err(e) => *map.entry(a.to_string()).or_default(),
+                        Err(e) => match map.get(a) {
+                            Some(v) => *v,
+                            None => {
+                                lines.push(line);
+                                continue;
+                            }
+                        },
                     };
                     let b = matched.get(2).unwrap().as_str();
                     let v2 = match map.get(b) {
@@ -72,7 +92,13 @@ impl Solution {
                     let a = matched.get(1).unwrap().as_str();
                     let v1 = match a.parse::<u16>() {
                         Ok(v) => v,
-                        Err(e) => *map.entry(a.to_string()).or_default(),
+                        Err(e) => match map.get(a) {
+                            Some(v) => *v,
+                            None => {
+                                lines.push(line);
+                                continue;
+                            }
+                        },
                     };
                     let b = matched.get(2).unwrap().as_str();
                     let v2 = match map.get(b) {
@@ -126,6 +152,8 @@ mod tests {
         assert_eq!(65079, Solution::aoc_07_part1(instructions, "i"));
         assert_eq!(123, Solution::aoc_07_part1(instructions, "x"));
         assert_eq!(456, Solution::aoc_07_part1(instructions, "y"));
+        let instructions = "b -> x\n123 -> x\n234 -> b";
+        assert_eq!(357, Solution::aoc_07_part1(instructions, "x"));
     }
 
     #[test]
