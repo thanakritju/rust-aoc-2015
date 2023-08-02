@@ -136,6 +136,6 @@ mod tests {
     #[test]
     fn test_05_part2_puzzle() {
         let data = fs::read_to_string("src/solution/input05.txt").expect("Unable to read file");
-        assert_eq!(0, Solution::aoc_05_part2(&data));
+        assert_eq!(55, Solution::aoc_05_part2(&data));
     }
 }
