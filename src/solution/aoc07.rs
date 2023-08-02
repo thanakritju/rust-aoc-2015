@@ -81,7 +81,7 @@ impl Solution {
                         None => 0,
                     };
                     println!("line: {} v1: {}, v2: {}", line, v1, v2);
-                    map.insert(b.to_string(), Self::add(v1, v2));
+                    map.insert(b.to_string(), v1);
                     continue;
                 }
                 None => {}
@@ -118,10 +118,6 @@ impl Solution {
     fn add(v1: u16, v2: u16) -> u16 {
         ((v1 as u32 + v2 as u32) % 65535).try_into().unwrap()
     }
-
-    pub fn aoc_07_part2(strs: &str) -> i32 {
-        0
-    }
 }
 
 #[cfg(test)]
@@ -157,19 +153,14 @@ mod tests {
     }
 
     #[test]
-    fn test_07_part2() {
-        assert_eq!(0, Solution::aoc_07_part2("(())"));
-    }
-
-    #[test]
     fn test_07_part1_puzzle() {
         let data = fs::read_to_string("src/solution/input07.txt").expect("Unable to read file");
-        assert_eq!(1, Solution::aoc_07_part1(&data, "a"));
+        assert_eq!(3176, Solution::aoc_07_part1(&data, "a"));
     }
 
     #[test]
     fn test_07_part2_puzzle() {
-        let data = fs::read_to_string("src/solution/input07.txt").expect("Unable to read file");
-        assert_eq!(0, Solution::aoc_07_part2(&data));
+        let data = fs::read_to_string("src/solution/input07-2.txt").expect("Unable to read file");
+        assert_eq!(14710, Solution::aoc_07_part1(&data, "a"));
     }
 }
