@@ -124,7 +124,7 @@ mod tests {
         );
         assert_eq!(1, Solution::aoc_06_part2("turn on 0,0 through 0,0"));
         assert_eq!(
-            1000000,
+            2000000,
             Solution::aoc_06_part2("turn off 0,0 through 999,999\ntoggle 0,0 through 999,999")
         );
     }

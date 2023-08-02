@@ -67,7 +67,7 @@ mod tests {{
 }
 
 fn create_input_file(filename: String) {
-    let mut file = File::create(format!("src/solution/{}", filename))
+    let mut _file = File::create(format!("src/solution/{}", filename))
         .expect("Error encountered while creating file!");
 }
 
