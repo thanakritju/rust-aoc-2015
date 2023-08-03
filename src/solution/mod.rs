@@ -6,3 +6,4 @@ mod aoc05;
 mod aoc06;
 mod aoc07;
 mod aoc08;
+mod aoc09;
