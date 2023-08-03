@@ -1,9 +1,9 @@
 use std::{cmp, str::FromStr};
 
-pub struct Solution {}
+pub struct _Solution {}
 
-impl Solution {
-    pub fn aoc_02_part1(strs: &str) -> i32 {
+impl _Solution {
+    pub fn _aoc_02_part1(strs: &str) -> i32 {
         let mut sum = 0;
         for line in strs.lines() {
             let dimensions = line.split('x').collect::<Vec<&str>>();
@@ -18,7 +18,7 @@ impl Solution {
         sum
     }
 
-    pub fn aoc_02_part2(strs: &str) -> i32 {
+    pub fn _aoc_02_part2(strs: &str) -> i32 {
         let mut sum = 0;
         for line in strs.lines() {
             let dimensions = line.split('x').collect::<Vec<&str>>();
@@ -54,28 +54,28 @@ mod tests {
 
     #[test]
     fn test_02_part1() {
-        assert_eq!(58, Solution::aoc_02_part1("2x3x4"));
-        assert_eq!(43, Solution::aoc_02_part1("1x1x10"));
-        assert_eq!(43 + 58, Solution::aoc_02_part1("2x3x4\n1x1x10\n"));
+        assert_eq!(58, _Solution::_aoc_02_part1("2x3x4"));
+        assert_eq!(43, _Solution::_aoc_02_part1("1x1x10"));
+        assert_eq!(43 + 58, _Solution::_aoc_02_part1("2x3x4\n1x1x10\n"));
     }
 
     #[test]
     fn test_02_part2() {
-        assert_eq!(34, Solution::aoc_02_part2("2x3x4"));
-        assert_eq!(14, Solution::aoc_02_part2("1x1x10"));
-        assert_eq!(48 + (21 * 12 * 12), Solution::aoc_02_part2("21x12x12"));
-        assert_eq!(14 + 34, Solution::aoc_02_part2("2x3x4\n1x1x10\n"));
+        assert_eq!(34, _Solution::_aoc_02_part2("2x3x4"));
+        assert_eq!(14, _Solution::_aoc_02_part2("1x1x10"));
+        assert_eq!(48 + (21 * 12 * 12), _Solution::_aoc_02_part2("21x12x12"));
+        assert_eq!(14 + 34, _Solution::_aoc_02_part2("2x3x4\n1x1x10\n"));
     }
 
     #[test]
     fn test_02_part1_puzzle() {
         let data = fs::read_to_string("src/solution/input02.txt").expect("Unable to read file");
-        assert_eq!(1588178, Solution::aoc_02_part1(&data));
+        assert_eq!(1588178, _Solution::_aoc_02_part1(&data));
     }
 
     #[test]
     fn test_02_part2_puzzle() {
         let data = fs::read_to_string("src/solution/input02.txt").expect("Unable to read file");
-        assert_eq!(3783758, Solution::aoc_02_part2(&data));
+        assert_eq!(3783758, _Solution::_aoc_02_part2(&data));
     }
 }

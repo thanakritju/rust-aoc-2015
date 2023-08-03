@@ -2,10 +2,10 @@ use std::collections::HashMap;
 
 use regex::Regex;
 
-pub struct Solution {}
+pub struct _Solution {}
 
-impl Solution {
-    pub fn aoc_07_part1(strs: &str, target: &str) -> u16 {
+impl _Solution {
+    pub fn _aoc_07_part1(strs: &str, target: &str) -> u16 {
         let mut map: HashMap<String, u16> = HashMap::new();
         let mixed_pattern = Regex::new(r"(\w+) (AND|LSHIFT|RSHIFT|OR) (\w+) -> (\w+)").unwrap();
         let add_compliment_pattern = Regex::new(r"NOT (\w+) -> (\w+)").unwrap();
@@ -19,7 +19,7 @@ impl Solution {
                     let a = matched.get(1).unwrap().as_str();
                     let a = match a.parse::<u16>() {
                         Ok(v) => v,
-                        Err(e) => match map.get(a) {
+                        Err(_e) => match map.get(a) {
                             Some(v) => *v,
                             None => {
                                 lines.push(line);
@@ -30,7 +30,7 @@ impl Solution {
                     let b = matched.get(3).unwrap().as_str();
                     let b = match b.parse::<u16>() {
                         Ok(v) => v,
-                        Err(e) => match map.get(b) {
+                        Err(_e) => match map.get(b) {
                             Some(v) => *v,
                             None => {
                                 lines.push(line);
@@ -56,7 +56,7 @@ impl Solution {
                         None => 0,
                     };
                     println!("line: {} v1: {}, v2: {}", line, v1, v2);
-                    map.insert(c.to_string(), Self::add(v1, v2));
+                    map.insert(c.to_string(), Self::_add(v1, v2));
                     continue;
                 }
                 None => {}
@@ -67,7 +67,7 @@ impl Solution {
                     let a = matched.get(1).unwrap().as_str();
                     let v1 = !match a.parse::<u16>() {
                         Ok(v) => v,
-                        Err(e) => match map.get(a) {
+                        Err(_e) => match map.get(a) {
                             Some(v) => *v,
                             None => {
                                 lines.push(line);
@@ -92,7 +92,7 @@ impl Solution {
                     let a = matched.get(1).unwrap().as_str();
                     let v1 = match a.parse::<u16>() {
                         Ok(v) => v,
-                        Err(e) => match map.get(a) {
+                        Err(_e) => match map.get(a) {
                             Some(v) => *v,
                             None => {
                                 lines.push(line);
@@ -106,7 +106,7 @@ impl Solution {
                         None => 0,
                     };
                     println!("line: {} v1: {}, v2: {}", line, v1, v2);
-                    map.insert(b.to_string(), Self::add(v1, v2));
+                    map.insert(b.to_string(), Self::_add(v1, v2));
                 }
                 None => {}
             }
@@ -115,7 +115,7 @@ impl Solution {
         *map.get(target).unwrap()
     }
 
-    fn add(v1: u16, v2: u16) -> u16 {
+    fn _add(v1: u16, v2: u16) -> u16 {
         ((v1 as u32 + v2 as u32) % 65535).try_into().unwrap()
     }
 }
@@ -129,38 +129,38 @@ mod tests {
     #[test]
     fn test_07_part1() {
         let instructions = "123 -> x";
-        assert_eq!(123, Solution::aoc_07_part1(instructions, "x"));
+        assert_eq!(123, _Solution::_aoc_07_part1(instructions, "x"));
         let instructions = "123 -> x\n123 -> x";
-        assert_eq!(246, Solution::aoc_07_part1(instructions, "x"));
+        assert_eq!(246, _Solution::_aoc_07_part1(instructions, "x"));
         let instructions = "123 -> x\n234 -> b\nb -> x";
-        assert_eq!(357, Solution::aoc_07_part1(instructions, "x"));
+        assert_eq!(357, _Solution::_aoc_07_part1(instructions, "x"));
         let instructions = "NOT 123 -> x";
-        assert_eq!(65412, Solution::aoc_07_part1(instructions, "x"));
+        assert_eq!(65412, _Solution::_aoc_07_part1(instructions, "x"));
         let instructions = "128 -> x\n65412 -> x";
-        assert_eq!(5, Solution::aoc_07_part1(instructions, "x"));
+        assert_eq!(5, _Solution::_aoc_07_part1(instructions, "x"));
 
         let instructions = "123 -> x\n456 -> y\nx AND y -> d\nx OR y -> e\nx LSHIFT 2 -> f\ny RSHIFT 2 -> g\nNOT x -> h\nNOT y -> i";
-        assert_eq!(72, Solution::aoc_07_part1(instructions, "d"));
-        assert_eq!(507, Solution::aoc_07_part1(instructions, "e"));
-        assert_eq!(492, Solution::aoc_07_part1(instructions, "f"));
-        assert_eq!(114, Solution::aoc_07_part1(instructions, "g"));
-        assert_eq!(65412, Solution::aoc_07_part1(instructions, "h"));
-        assert_eq!(65079, Solution::aoc_07_part1(instructions, "i"));
-        assert_eq!(123, Solution::aoc_07_part1(instructions, "x"));
-        assert_eq!(456, Solution::aoc_07_part1(instructions, "y"));
+        assert_eq!(72, _Solution::_aoc_07_part1(instructions, "d"));
+        assert_eq!(507, _Solution::_aoc_07_part1(instructions, "e"));
+        assert_eq!(492, _Solution::_aoc_07_part1(instructions, "f"));
+        assert_eq!(114, _Solution::_aoc_07_part1(instructions, "g"));
+        assert_eq!(65412, _Solution::_aoc_07_part1(instructions, "h"));
+        assert_eq!(65079, _Solution::_aoc_07_part1(instructions, "i"));
+        assert_eq!(123, _Solution::_aoc_07_part1(instructions, "x"));
+        assert_eq!(456, _Solution::_aoc_07_part1(instructions, "y"));
         let instructions = "b -> x\n123 -> x\n234 -> b";
-        assert_eq!(357, Solution::aoc_07_part1(instructions, "x"));
+        assert_eq!(357, _Solution::_aoc_07_part1(instructions, "x"));
     }
 
     #[test]
     fn test_07_part1_puzzle() {
         let data = fs::read_to_string("src/solution/input07.txt").expect("Unable to read file");
-        assert_eq!(3176, Solution::aoc_07_part1(&data, "a"));
+        assert_eq!(3176, _Solution::_aoc_07_part1(&data, "a"));
     }
 
     #[test]
     fn test_07_part2_puzzle() {
         let data = fs::read_to_string("src/solution/input07-2.txt").expect("Unable to read file");
-        assert_eq!(14710, Solution::aoc_07_part1(&data, "a"));
+        assert_eq!(14710, _Solution::_aoc_07_part1(&data, "a"));
     }
 }

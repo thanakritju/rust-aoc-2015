@@ -1,9 +1,9 @@
 use regex::Regex;
 
-pub struct Solution {}
+pub struct _Solution {}
 
-impl Solution {
-    pub fn aoc_06_part1(strs: &str) -> i32 {
+impl _Solution {
+    pub fn _aoc_06_part1(strs: &str) -> i32 {
         let mut state = vec![vec![false; 1000]; 1000];
         for line in strs.lines() {
             let re =
@@ -45,7 +45,7 @@ impl Solution {
         sum
     }
 
-    pub fn aoc_06_part2(strs: &str) -> i64 {
+    pub fn _aoc_06_part2(strs: &str) -> i64 {
         let mut state = vec![vec![0 as u32; 1000]; 1000];
         for line in strs.lines() {
             let re =
@@ -99,20 +99,22 @@ mod tests {
     fn test_06_part1() {
         assert_eq!(
             1000 * 1000,
-            Solution::aoc_06_part1("turn on 0,0 through 999,999")
+            _Solution::_aoc_06_part1("turn on 0,0 through 999,999")
         );
-        assert_eq!(1000, Solution::aoc_06_part1("toggle 0,0 through 999,0"));
+        assert_eq!(1000, _Solution::_aoc_06_part1("toggle 0,0 through 999,0"));
         assert_eq!(
             0,
-            Solution::aoc_06_part1("toggle 0,0 through 999,0\ntoggle 0,0 through 999,0")
+            _Solution::_aoc_06_part1("toggle 0,0 through 999,0\ntoggle 0,0 through 999,0")
         );
         assert_eq!(
             0,
-            Solution::aoc_06_part1("turn off 499,499 through 500,500")
+            _Solution::_aoc_06_part1("turn off 499,499 through 500,500")
         );
         assert_eq!(
             1000 * 1000 - 4,
-            Solution::aoc_06_part1("toggle 0,0 through 999,999\nturn off 499,499 through 500,500")
+            _Solution::_aoc_06_part1(
+                "toggle 0,0 through 999,999\nturn off 499,499 through 500,500"
+            )
         );
     }
 
@@ -120,24 +122,24 @@ mod tests {
     fn test_06_part2() {
         assert_eq!(
             2000000,
-            Solution::aoc_06_part2("toggle 0,0 through 999,999")
+            _Solution::_aoc_06_part2("toggle 0,0 through 999,999")
         );
-        assert_eq!(1, Solution::aoc_06_part2("turn on 0,0 through 0,0"));
+        assert_eq!(1, _Solution::_aoc_06_part2("turn on 0,0 through 0,0"));
         assert_eq!(
             2000000,
-            Solution::aoc_06_part2("turn off 0,0 through 999,999\ntoggle 0,0 through 999,999")
+            _Solution::_aoc_06_part2("turn off 0,0 through 999,999\ntoggle 0,0 through 999,999")
         );
     }
 
     #[test]
     fn test_06_part1_puzzle() {
         let data = fs::read_to_string("src/solution/input06.txt").expect("Unable to read file");
-        assert_eq!(400410, Solution::aoc_06_part1(&data));
+        assert_eq!(400410, _Solution::_aoc_06_part1(&data));
     }
 
     #[test]
     fn test_06_part2_puzzle() {
         let data = fs::read_to_string("src/solution/input06.txt").expect("Unable to read file");
-        assert_eq!(15343601, Solution::aoc_06_part2(&data));
+        assert_eq!(15343601, _Solution::_aoc_06_part2(&data));
     }
 }

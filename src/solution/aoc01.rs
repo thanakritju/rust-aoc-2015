@@ -36,27 +36,27 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_aoc_01_part1() {
+    fn test_01_part1() {
         assert_eq!(0, _Solution::_aoc_01_part1("(())"));
         assert_eq!(3, _Solution::_aoc_01_part1("((("));
         assert_eq!(-3, _Solution::_aoc_01_part1(")())())"));
     }
 
     #[test]
-    fn test_aoc_01_part1_puzzle() {
-        let data = fs::read_to_string("src/_Solution/input01.txt").expect("Unable to read file");
+    fn test_01_part1_puzzle() {
+        let data = fs::read_to_string("src/solution/input01.txt").expect("Unable to read file");
         assert_eq!(280, _Solution::_aoc_01_part1(&data));
     }
 
     #[test]
-    fn test_aoc_01_part2() {
+    fn test_01_part2() {
         assert_eq!(1, _Solution::_aoc_01_part2(")"));
         assert_eq!(5, _Solution::_aoc_01_part2("()())"));
     }
 
     #[test]
-    fn test_aoc_01_part2_puzzle() {
-        let data = fs::read_to_string("src/_Solution/input01.txt").expect("Unable to read file");
+    fn test_01_part2_puzzle() {
+        let data = fs::read_to_string("src/solution/input01.txt").expect("Unable to read file");
         assert_eq!(1797, _Solution::_aoc_01_part2(&data));
     }
 }
