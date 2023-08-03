@@ -19,14 +19,14 @@ fn create_solution_file(filename: String, id: String) {
         .expect("Error encountered while creating file!");
     file.write_all(
         format!(
-            "pub struct Solution {{}}
+            "pub struct _Solution {{}}
 
-impl Solution {{
-    pub fn aoc_{id}_part1(strs: &str) -> i32 {{
+impl _Solution {{
+    pub fn _aoc_{id}_part1(strs: &str) -> i32 {{
         0
     }}
 
-    pub fn aoc_{id}_part2(strs: &str) -> i32 {{
+    pub fn _aoc_{id}_part2(strs: &str) -> i32 {{
         0
     }}
 }}
@@ -39,24 +39,24 @@ mod tests {{
 
     #[test]
     fn test_{id}_part1() {{
-        assert_eq!(0, Solution::aoc_{id}_part1(\"(())\"));
+        assert_eq!(0, _Solution::_aoc_{id}_part1(\"(())\"));
     }}
 
     #[test]
     fn test_{id}_part2() {{
-        assert_eq!(0, Solution::aoc_{id}_part2(\"(())\"));
+        assert_eq!(0, _Solution::_aoc_{id}_part2(\"(())\"));
     }}
 
     #[test]
     fn test_{id}_part1_puzzle() {{
         let data = fs::read_to_string(\"src/solution/input{id}.txt\").expect(\"Unable to read file\");
-        assert_eq!(0, Solution::aoc_{id}_part1(&data));
+        assert_eq!(0, _Solution::_aoc_{id}_part1(&data));
     }}
 
     #[test]
     fn test_{id}_part2_puzzle() {{
         let data = fs::read_to_string(\"src/solution/input{id}.txt\").expect(\"Unable to read file\");
-        assert_eq!(0, Solution::aoc_{id}_part2(&data));
+        assert_eq!(0, _Solution::_aoc_{id}_part2(&data));
     }}
 }}",
             id = id

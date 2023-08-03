@@ -69,7 +69,7 @@ impl Solution {
     fn a_pair_duplicate(s: &str) -> bool {
         for (i, w1) in s.chars().collect::<Vec<char>>().windows(2).enumerate() {
             for (j, w2) in s.chars().collect::<Vec<char>>().windows(2).enumerate() {
-                if (i == j || i == j + 1 || i + 1 == j) {
+                if i == j || i == j + 1 || i + 1 == j {
                     continue;
                 }
                 if w1[0] == w2[0] && w1[1] == w2[1] {
